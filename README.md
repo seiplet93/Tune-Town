@@ -4,6 +4,10 @@ Tune town is an app designed to catalog your favorite music. There's no worse fe
 
 This app will be using either Discogs' API (this API has more features but is more of a pain to connect tto) or the Audio DB API (easier connectivity, but less data to pull from).
 
+### RESTful Routes
+
+![RRC](./img/RRC.png)
+
 ### User Stories
 
 As a user, i want to be able to: Curate a catalog of music I listen to.
