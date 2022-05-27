@@ -24,20 +24,20 @@ This app will be using either Discogs' API (this API has more features but is mo
 
 ### User Stories
 
-As a user, i want to be able to: Curate a catalog of music I listen to.
-As a user, i want to be able to: Comment on other users profile to discuss music in their catalog.
-As a user, i want to be able to search for music in a database to find the music I'm familiar with.
+- As a user, i want to be able to: Curate a catalog of music I listen to.
+- As a user, i want to be able to: Comment on other users profile to discuss music in their catalog.
+- As a user, i want to be able to search for music in a database to find the music I'm familiar with.
 
 ### Goals
 
 #### MVP
 
-Have users with unique profiles.
-Ability for users to add songs, albums, or artists to their catalog on their profile.
-Ability to add comments on user profiles.
+- Have users with unique profiles.
+- Ability for users to add songs, albums, or artists to their catalog on their profile.
+- Ability to add comments on user profiles.
 
 #### Stretch
 
-Add Styling.
-Add playlist sub sections to user profiles.
-Utilize discog API to search by genre to find new music.
+- Add Styling.
+- Add playlist sub sections to user profiles.
+- Utilize discog API to search by genre to find new music.
