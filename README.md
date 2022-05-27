@@ -8,6 +8,20 @@ This app will be using either Discogs' API (this API has more features but is mo
 
 ![RRC](./img/RRC.png)
 
+### VIEWS
+
+#### Home Page
+
+![Home](./img/index.png)
+
+#### Profile
+
+![RRC](./img/profile.png)
+
+#### Results
+
+![RRC](./img/results.png)
+
 ### User Stories
 
 As a user, i want to be able to: Curate a catalog of music I listen to.
