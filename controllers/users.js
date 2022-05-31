@@ -91,12 +91,24 @@ router.get("/logout", (req, res) => {
 
 router.get("/profile", async (req, res) => {
   //check if user is authorized
+  console.log(res.locals.user.id, "HELLO");
   if (!res.locals.user) {
     // if the user is not authorized, ask them to log in
     res.render("users/login.ejs", { msg: "please log in to continue" });
     return; //end the route here
   }
-  const allMusic = await db.music.findAll();
+  const user = await db.user.findOne({
+    where: {
+      id: res.locals.user.id,
+    },
+  });
+  const allMusic = await db.music.findAll({
+    where: {
+      userId: user.id,
+    },
+  });
+  // let loggedInUsersTunes = await res.locals.user.getMusic();
+
   res.render("users/profile", { user: res.locals.user, allMusic });
 });
 router.post("/profile", async (req, res) => {
@@ -106,13 +118,21 @@ router.post("/profile", async (req, res) => {
     res.render("users/login.ejs", { msg: "please log in to continue" });
     return; //end the route here
   }
-  console.log(res.locals.user);
+  // console.log(res.locals.user);
+  await db.comment.create({
+    content: req.body.comment,
+    userId: res.locals.user.id,
+  });
   await db.music.create({
     artist: req.body.name,
     userId: res.locals.user.id,
   });
+  //find all comments on that users page
+  // need to be able to show the commenters id?
+  // let comments = await res.locals.user.getComment();
+  // console.log(comments);
 
-  res.redirect("users/profile");
+  res.redirect("/users/profile");
 });
 //  //{
 //    user: res.locals.user;

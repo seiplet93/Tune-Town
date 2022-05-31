@@ -67,6 +67,8 @@ app.use(async (req, res, next) => {
 
 // routes
 app.get("/", (req, res) => {
+  let loggedInUsersTunes = res.locals.user.getMusic();
+  console.log(loggedInUsersTunes);
   res.render("index");
 });
 app.get("/search", (req, res) => {
