@@ -7,9 +7,9 @@ const cookieParser = require("cookie-parser");
 const db = require("./models");
 const cryptoJS = require("crypto-js");
 const res = require("express/lib/response");
-
+const axios = require("axios");
 // app config
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 const app = express();
 app.set("view engine", "ejs");
 
@@ -68,6 +68,22 @@ app.use(async (req, res, next) => {
 // routes
 app.get("/", (req, res) => {
   res.render("index");
+});
+app.get("/search", (req, res) => {
+  res.render("search.ejs");
+});
+
+app.get("/results", (req, res) => {
+  //, { music: response });
+  axios
+    .get(
+      `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${req.query.musicSearch}`
+    )
+    .then((response) => {
+      // console.log(response.data.artists);
+      res.render("results.ejs", { music: response.data.artists });
+    })
+    .catch(console.log);
 });
 
 // controllers

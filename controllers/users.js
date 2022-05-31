@@ -89,14 +89,32 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/profile", (req, res) => {
+router.get("/profile", async (req, res) => {
   //check if user is authorized
   if (!res.locals.user) {
     // if the user is not authorized, ask them to log in
     res.render("users/login.ejs", { msg: "please log in to continue" });
     return; //end the route here
   }
-
-  res.render("users/profile", { user: res.locals.user });
+  const allMusic = await db.music.findAll();
+  res.render("users/profile", { user: res.locals.user, allMusic });
 });
+router.post("/profile", async (req, res) => {
+  //check if user is authorized
+  if (!res.locals.user) {
+    // if the user is not authorized, ask them to log in
+    res.render("users/login.ejs", { msg: "please log in to continue" });
+    return; //end the route here
+  }
+  console.log(res.locals.user);
+  await db.music.create({
+    artist: req.body.name,
+    userId: res.locals.user.id,
+  });
+
+  res.redirect("users/profile");
+});
+//  //{
+//    user: res.locals.user;
+//  }
 module.exports = router;
