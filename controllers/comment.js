@@ -32,7 +32,17 @@ router.post("/add", async (req, res) => {
 
   res.redirect(`/users/profile`);
 });
-router.delete("/delete", async (req, res) => {});
+router.delete("/delete", async (req, res) => {
+  commentId = db.comment.id;
+
+  await db.comment.destroy({
+    where: {
+      id: req.body.deletepls,
+    },
+  });
+  console.log(req.query);
+  res.redirect(`/users/profile`);
+});
 
 module.exports = router;
 

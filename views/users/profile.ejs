@@ -18,7 +18,8 @@
 
   <li>
     <%= allCs.content %>
-    <form action="/users/<%= params %>/profile" method="POST">
+    <form action="/comment/delete?_method=DELETE" method="POST">
+      <input name="deletepls" hidden type="text" value="<%= allCs.id %>" />
       <input type="submit" value="Delete" />
     </form>
   </li>
