@@ -46,7 +46,9 @@ app.use(async (req, res, next) => {
         userId,
         process.env.ENC_KEY
       ).toString(cryptoJS.enc.Utf8);
-      const user = await db.user.findByPk(decryptedId);
+      const user = await db.user.findByPk(decryptedId, {
+        include: [db.comment],
+      });
       // mount the found user on the res.locals so that later routes can access the logged in user
       // any value on the res.locals is available to the layout.ejs
       res.locals.user = user;
@@ -67,8 +69,6 @@ app.use(async (req, res, next) => {
 
 // routes
 app.get("/", (req, res) => {
-  let loggedInUsersTunes = res.locals.user.getMusic();
-  console.log(loggedInUsersTunes);
   res.render("index");
 });
 app.get("/search", (req, res) => {

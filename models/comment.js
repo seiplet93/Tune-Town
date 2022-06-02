@@ -8,9 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.comment.belongsTo(models.user, {
-        through: "commentsUsers",
-      });
+      models.comment.belongsTo(models.user);
     }
   }
   comment.init(

@@ -107,11 +107,60 @@ router.get("/profile", async (req, res) => {
       userId: user.id,
     },
   });
+
+  // show comments from other users with an ID of the page's user
+  // show the commenters user id
+  const allComments = await db.comment.findAll({
+    where: {
+      musicId: user.id,
+    },
+  });
+
   // let loggedInUsersTunes = await res.locals.user.getMusic();
 
   res.render("users/profile", { user: res.locals.user, allMusic });
 });
-router.post("/profile", async (req, res) => {
+
+router.get("/:id/profile", async (req, res) => {
+  //check if user is authorized
+  // console.log(res.locals.user, "HELLO");
+  if (!res.locals.user) {
+    // if the user is not authorized, ask them to log in
+    res.render("users/login.ejs", { msg: "please log in to continue" });
+    return; //end the route here
+  }
+  console.log(req.params);
+  const user = await db.user.findOne({
+    where: {
+      id: res.locals.user.id,
+    },
+  });
+  const allMusic = await db.music.findAll({
+    where: {
+      userId: req.params.id,
+    },
+  });
+
+  // show comments from other users with an ID of the page's user
+  // show the commenters user id
+  const allComments = await db.comment.findAll({
+    where: {
+      musicId: req.params.id,
+    },
+  });
+  const params = req.params.id;
+  // console.log(allComments);
+  // let loggedInUsersTunes = await res.locals.user.getMusic();
+
+  res.render("users/profile", {
+    user: res.locals.user,
+    allMusic,
+    allComments,
+    params,
+  });
+});
+
+router.post("/:id/profile", async (req, res) => {
   //check if user is authorized
   if (!res.locals.user) {
     // if the user is not authorized, ask them to log in
@@ -119,9 +168,18 @@ router.post("/profile", async (req, res) => {
     return; //end the route here
   }
   // console.log(res.locals.user);
-  await db.comment.create({
+  // const user = await db.user.findOne({
+  //   where: {
+  //     id: res.locals.user.id,
+  //   },
+  // });
+  // await db.comment.create({
+  //   content: req.body.comment,
+  //
+  // });
+  await res.locals.user.createComment({
     content: req.body.comment,
-    userId: res.locals.user.id,
+    musicId: req.params.id,
   });
   await db.music.create({
     artist: req.body.name,
@@ -132,7 +190,7 @@ router.post("/profile", async (req, res) => {
   // let comments = await res.locals.user.getComment();
   // console.log(comments);
 
-  res.redirect("/users/profile");
+  res.redirect(`/users/${req.params.id}/profile`);
 });
 //  //{
 //    user: res.locals.user;

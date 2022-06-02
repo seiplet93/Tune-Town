@@ -73,6 +73,3 @@
 //     next(err);
 //   }
 // });
-
-let loggedInUsersTunes = res.locals.user.getMusic();
-console.log(loggedInUsersTunes);
