@@ -107,18 +107,24 @@ router.get("/profile", async (req, res) => {
       userId: user.id,
     },
   });
+  const params = req.params.id;
 
   // show comments from other users with an ID of the page's user
   // show the commenters user id
   const allComments = await db.comment.findAll({
     where: {
-      musicId: user.id,
+      musicId: res.locals.user.id,
     },
   });
 
   // let loggedInUsersTunes = await res.locals.user.getMusic();
 
-  res.render("users/profile", { user: res.locals.user, allMusic });
+  res.render("users/profile", {
+    user: res.locals.user,
+    allMusic,
+    params,
+    allComments,
+  });
 });
 
 router.get("/:id/profile", async (req, res) => {
@@ -160,37 +166,61 @@ router.get("/:id/profile", async (req, res) => {
   });
 });
 
-router.post("/:id/profile", async (req, res) => {
-  //check if user is authorized
+// router.post("/:id/profile", async (req, res) => {
+//   //check if user is authorized
+//   if (!res.locals.user) {
+//     // if the user is not authorized, ask them to log in
+//     res.render("users/login.ejs", { msg: "please log in to continue" });
+//     return; //end the route here
+//   }
+//   // console.log(res.locals.user);
+//   // const user = await db.user.findOne({
+//   //   where: {
+//   //     id: res.locals.user.id,
+//   //   },
+//   // });
+//   // await db.comment.create({
+//   //   content: req.body.comment,
+//   //
+//   // });
+//   await res.locals.user.createComment({
+//     content: req.body.comment,
+//     musicId: req.params.id,
+//   });
+//   await db.music.create({
+//     artist: req.body.name,
+//     userId: res.locals.user.id,
+//   });
+//find all comments on that users page
+// need to be able to show the commenters id?
+// let comments = await res.locals.user.getComment();
+// console.log(comments);
+
+//   res.redirect(`/users/${req.params.id}/profile`);
+// });
+
+router.post("/profile", async (req, res) => {
   if (!res.locals.user) {
     // if the user is not authorized, ask them to log in
     res.render("users/login.ejs", { msg: "please log in to continue" });
     return; //end the route here
   }
-  // console.log(res.locals.user);
-  // const user = await db.user.findOne({
-  //   where: {
-  //     id: res.locals.user.id,
-  //   },
-  // });
-  // await db.comment.create({
-  //   content: req.body.comment,
-  //
-  // });
-  await res.locals.user.createComment({
-    content: req.body.comment,
-    musicId: req.params.id,
-  });
-  await db.music.create({
-    artist: req.body.name,
-    userId: res.locals.user.id,
-  });
-  //find all comments on that users page
-  // need to be able to show the commenters id?
-  // let comments = await res.locals.user.getComment();
-  // console.log(comments);
+  console.log(req.body);
 
-  res.redirect(`/users/${req.params.id}/profile`);
+  // await db.music.create({
+  //   artist: req.body.name,
+  //   userId: res.locals.user.id,
+  // });
+
+  // await res.locals.user.createComment({
+  //   content: req.body.comment,
+  //   musicId: res.locals.user.id,
+  // });
+
+  res.redirect("/users/profile");
+});
+router.delete("/profile", async (req, res) => {
+  await db.comment.delete({});
 });
 //  //{
 //    user: res.locals.user;

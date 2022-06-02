@@ -8,7 +8,7 @@
   <li><%= allFaves.artist %></li>
   <%})%>
 </ul>
-<form action="/users/<%= params %>/profile" method="POST">
+<form action="/comment/add" method="POST">
   <input type="text" name="comment" />
   <button type="submit">Comment</button>
 </form>
@@ -16,7 +16,11 @@
 <ul>
   <% allComments.forEach(allCs => { %>
 
-  <li><%= allCs.content %></li>
-  <button>Delete Comment</button>
+  <li>
+    <%= allCs.content %>
+    <form action="/users/<%= params %>/profile" method="POST">
+      <input type="submit" value="Delete" />
+    </form>
+  </li>
   <%})%>
 </ul>

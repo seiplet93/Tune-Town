@@ -10,7 +10,7 @@
   <h3><%= musics.strArtist %></h3>
   <p><%= musics.strGenre %></p>
   <img src="<%= musics.strArtistThumb %>" alt="Artist Picture" />
-  <form method="POST" action="users/profile">
+  <form method="POST" action="music/add">
     <input hidden type="text" name="name" value="<%= musics.strArtist %>" />
     <button type="submit">Add to Profile</button>
   </form>

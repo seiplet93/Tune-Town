@@ -8,12 +8,14 @@ const db = require("./models");
 const cryptoJS = require("crypto-js");
 const res = require("express/lib/response");
 const axios = require("axios");
+const methodOverride = require("method-override");
 // app config
 const PORT = process.env.PORT || 3002;
 const app = express();
 app.set("view engine", "ejs");
 
 // middlewares
+app.use(methodOverride("_method"));
 const rowdyRes = rowdy.begin(app);
 app.use(require("express-ejs-layouts"));
 app.use(express.urlencoded({ extended: false }));
@@ -90,6 +92,8 @@ app.get("/results", (req, res) => {
 
 // controllers
 app.use("/users", require("./controllers/users"));
+app.use("/music", require("./controllers/music"));
+app.use("/comment", require("./controllers/comment"));
 
 // 404 error handler -- NEEDS TO GO LAST
 // app.get('/*', (req, res) => {
