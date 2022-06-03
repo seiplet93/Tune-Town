@@ -165,6 +165,59 @@ router.get("/:id/profile", async (req, res) => {
     params,
   });
 });
+router.get("/changepw", async (req, res) => {
+  res.render("users/changepw.ejs", { msg: "" });
+});
+router.put("/changepw", async (req, res) => {
+  console.log(req.query, "YOOOOOOO");
+  try {
+    // look up the user in the db based on their email
+    const foundUser = req.query.user;
+    const newPw = req.body.newpassword;
+    //    where: { email: req.body.email },
+    //  });
+    //  const msg = "bad login credentials, you are not authenticated";
+    //  // if the user is not found -- display the login form and give them a message
+    //  if (!foundUser) {
+    //    console.log("email not found on login");
+    //    res.render("users/login.ejs", { msg });
+    //    return; //do not continue with the function
+    //  }
+    // otherwise, check the provided password against the password in the db
+    // has the password from the req.body and compare it to the db password
+
+    const compare = bcrypt.compareSync(
+      req.body.oldpassword,
+      foundUser.password
+    );
+    if (compare) {
+      const hashedPassword = bcrypt.hashSync(req.body.newpassword, 12);
+      db.user.update(
+        {
+          password: hashedPassword,
+        },
+        {
+          where: {
+            id: foundUser,
+          },
+        }
+      );
+      // if they match -- send the user a cookie to log them in
+      // const encryptedId = cryptoJS.AES.encrypt(
+      //   foundUser.id.toString(),
+      //   process.env.ENC_KEY
+      //.toString();
+      // res.cookie("userId", encryptedId);
+      // res.redirect("/users/profile");
+      // foundUser.password = newPw;
+    } else {
+      res.render("users/login.ejs", { msg: "Not a matching PW" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  res.render("users/changepw.ejs", { msg: "pw changed" });
+});
 
 // router.post("/:id/profile", async (req, res) => {
 //   //check if user is authorized

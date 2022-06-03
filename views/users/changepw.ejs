@@ -1,0 +1,23 @@
+<p><%= msg %></p>
+
+<form action="/users/changepw" method="PUT">
+  <label for="oldpw">Current Password</label>
+  <input
+    id="oldpw"
+    type="password"
+    name="oldpw"
+    placeholder="enter your current passowrd"
+    required
+  />
+
+  <label for="newpassword">New Password</label>
+  <input
+    id="newpassword"
+    type="password"
+    name="newpassword"
+    placeholder="enter your new password"
+    required
+  />
+
+  <button type="submit">Change Password</button>
+</form>
