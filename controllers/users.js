@@ -169,10 +169,10 @@ router.get("/changepw", async (req, res) => {
   res.render("users/changepw.ejs", { msg: "" });
 });
 router.put("/changepw", async (req, res) => {
-  console.log(req.query, "YOOOOOOO");
+  console.log(res.locals.user, "YOOOOOOO");
   try {
     // look up the user in the db based on their email
-    const foundUser = req.query.user;
+    const foundUser = res.locals.user;
     const newPw = req.body.newpassword;
     //    where: { email: req.body.email },
     //  });
@@ -186,22 +186,15 @@ router.put("/changepw", async (req, res) => {
     // otherwise, check the provided password against the password in the db
     // has the password from the req.body and compare it to the db password
 
-    const compare = bcrypt.compareSync(
-      req.body.oldpassword,
-      foundUser.password
-    );
+    const compare = bcrypt.compareSync(req.body.oldpw, foundUser.password);
     if (compare) {
+      console.log("its working?");
       const hashedPassword = bcrypt.hashSync(req.body.newpassword, 12);
-      db.user.update(
-        {
-          password: hashedPassword,
-        },
-        {
-          where: {
-            id: foundUser,
-          },
-        }
-      );
+      foundUser.password = hashedPassword;
+      // await foundUser.update({
+      //   password: newPw,
+      // });
+      await foundUser.save();
       // if they match -- send the user a cookie to log them in
       // const encryptedId = cryptoJS.AES.encrypt(
       //   foundUser.id.toString(),
