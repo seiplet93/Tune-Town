@@ -1,0 +1,87 @@
+* {
+  text-decoration: none;
+  background-color: rgb(44, 46, 49);
+}
+.mainhead {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+#logo {
+  height: 50px;
+}
+a {
+  color: #bdc1c6;
+}
+body {
+  color: #bdc1c6;
+}
+.splashc {
+  display: flex;
+}
+.laymain {
+  background-color: rgb(44, 46, 49);
+}
+.splasha {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -5;
+  background-image: url("/imgs/splash.jpg");
+  background-repeat: no-repeat, repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: rgb(44, 46, 49);
+}
+nav {
+  border: 1px;
+  border-style: solid;
+  padding: 0px;
+}
+.welcome {
+  background: transparent;
+}
+.leftheader {
+  font-size: 20px;
+  margin: 0px 10px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #bdc1c6;
+
+  padding: 1px;
+}
+button {
+  background-color: rgb(104, 209, 174);
+  height: 50px;
+  font-size: 20px;
+}
+.submitBtn {
+  background-color: rgb(104, 209, 174);
+  height: 30px;
+  font-size: 20px;
+  color: black;
+  width: 200px;
+}
+input {
+  height: 50px;
+  width: 200px;
+  font-size: 20px;
+  color: #bdc1c6;
+}
+form {
+  font-size: 20px;
+  color: #bdc1c6;
+}
+body {
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.leftdiv {
+  font-size: 15px;
+  display: flex;
+  color: #bdc1c6;
+}

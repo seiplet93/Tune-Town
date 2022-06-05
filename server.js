@@ -20,6 +20,7 @@ const rowdyRes = rowdy.begin(app);
 app.use(require("express-ejs-layouts"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static("public"));
 
 // DIY middleware
 // happens on every request
