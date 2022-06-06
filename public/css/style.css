@@ -23,23 +23,74 @@ body {
   background-color: rgb(44, 46, 49);
 }
 .splasha {
+  display: flex;
   margin: 0;
   width: 100vw;
   height: 100vh;
   z-index: -5;
-  background-image: url("/imgs/splash.jpg");
+  background-image: url("");
   background-repeat: no-repeat, repeat;
   background-position: center;
   background-size: cover;
   background-color: rgb(44, 46, 49);
 }
+#welcomep {
+  top: 40%;
+  font-size: 24px;
+  width: 400px;
+  font-weight: bold;
+}
 nav {
   border: 1px;
   border-style: solid;
   padding: 0px;
+  z-index: 1;
 }
 .welcome {
+  position: absolute;
+  display: flex;
+  justify-content: center;
   background: transparent;
+  font-size: 28px;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(104, 209, 174);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+#lwb {
+  top: 51%;
+  position: absolute;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(104, 209, 174);
+  color: black;
+  height: 30px;
+  width: 70px;
+  font-size: 22px;
+}
+#rwb {
+  top: 51%;
+  position: absolute;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(104, 209, 174);
+  color: black;
+  border-style: solid;
+  border: 1px;
+  height: 30px;
+  width: 70px;
+  font-size: 21px;
+}
+.welcomec {
+  z-index: 0;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
 }
 .leftheader {
   font-size: 20px;
