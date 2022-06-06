@@ -114,6 +114,9 @@ button {
   color: black;
   width: 170px;
 }
+.comments {
+  font-size: 24px;
+}
 input {
   height: 50px;
   width: 200px;

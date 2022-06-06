@@ -22,7 +22,7 @@
   <ul>
     <% allComments.forEach(allCs => { %>
 
-    <li>
+    <li class="comments">
       <%= allCs.content %>
       <form action="/comment/delete?_method=DELETE" method="POST">
         <input name="deletepls" hidden type="text" value="<%= allCs.id %>" />
