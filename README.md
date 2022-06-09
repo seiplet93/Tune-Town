@@ -36,7 +36,7 @@ Deployment Link: https://tunetown425.herokuapp.com/
 
 ### Installation Instructions
 
-- Clone this repository
+- Fork/Clone this repository
 - Open the directory of this app in your command line program and run "npm i" to install all dependant packages
 - Create a '.env' file and add an encryption key with a value of your choosing (preferably something random). For example: ENC_KEY="asdf1234qwerty"
 - Use the 'nodemon' command to run the app locally (defaulted to port 3002)
